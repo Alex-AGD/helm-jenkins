@@ -1,0 +1,71 @@
+replicaCount: 1
+
+image:
+  repository: https://jfrog.it-academy.by:443/artifactory/public/jenkins-ci/aleksey_do/
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: "ci-cd"
+  annotations: {}
+  hosts:
+    - host: jenkins.k8s-5.sa
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+pvc:
+  storage_class: nfs-app
+  storage_size: 300Mi
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+volumes:
+  - name: persistent-storage
+    persistentVolumeClaim:
+      claimName: pv-claim-helm
+  - name: nginx-config
+    configMap:
+      name: nginx-config
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
