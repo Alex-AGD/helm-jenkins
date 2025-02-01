@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "jenkins.fullname" . }}
-  labels:
-    {{- include "jenkins.labels" . | nindent 4 }}
+  name: jenkins
+  namespace: {{ .Values.namespace }}
 spec:
-  type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+    - name: master
+      port: {{ .Values.jenkins.ports.http }}
+      targetPort: {{ .Values.jenkins.ports.http }}
+    - name: slave
+      port: {{ .Values.jenkins.ports.jnlp }}
+      targetPort: {{ .Values.jenkins.ports.jnlp }}
   selector:
-    {{- include "jenkins.selectorLabels" . | nindent 4 }}
+    app: jenkins

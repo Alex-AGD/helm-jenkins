@@ -1,13 +1,48 @@
 replicaCount: 1
 
+namespace: ci-cd
+
 image:
   repository: jfrog.it-academy.by/public/jenkins-ci
   tag: aleksey_do
   pullPolicy: IfNotPresent
 
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+jenkins:
+  numExecutors: 2
+  adminEmail: "pluhin@gmail.com"
+  url: "http://jenkins.k8s-XX.sa"
+  resources:
+    requests:
+      cpu: 2
+      memory: 2Gi
+    limits:
+      cpu: 3
+      memory: 3Gi
+  ports:
+    http: 8080
+    jnlp: 50000
+
+credentials:
+  admin:
+    username: admin
+    password: pass
+  github:
+    username: git_hub_user
+    password: XXXXXXXXXXX
+    id: some_randome
+
+persistence:
+  nfs:
+    server: 192.168.37.105
+    path: /mnt/IT-Academy/nfs-data/sa2-30-24/alex_agd/jenkins
+
+ingress:
+  enabled: true
+  className: nginx
+  host: jenkins.k8s-5.sa
+  servicePort: 8080
+  path: /
+  pathType: Prefix
 
 serviceAccount:
   create: true
@@ -26,28 +61,9 @@ service:
   type: ClusterIP
   port: 80
 
-ingress:
-  enabled: true
-  className: "ci-cd"
-  annotations: {}
-  hosts:
-    - host: jenkins.k8s-5.sa
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
 
-pvc:
-  storage_class: nfs-app
-  storage_size: 300Mi
 
-resources:
-  limits:
-    cpu: 100m
-    memory: 256Mi
-  requests:
-    cpu: 100m
-    memory: 256Mi
+
 
 autoscaling:
   enabled: false
@@ -56,13 +72,6 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-volumes:
-  - name: persistent-storage
-    persistentVolumeClaim:
-      claimName: pv-claim-helm
-  - name: nginx-config
-    configMap:
-      name: nginx-config
 
 nodeSelector: {}
 
