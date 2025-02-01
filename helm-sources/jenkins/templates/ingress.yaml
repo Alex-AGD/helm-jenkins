@@ -16,5 +16,5 @@ spec:
               service:
                 name: jenkins
                 port:
-                  number: {{ .Values.jenkins.ingress.servicePort }}
+                  number: {{ .Values.ingress.servicePort }}
 {{- end }}

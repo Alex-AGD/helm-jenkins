@@ -9,7 +9,7 @@ spec:
   ports:
     - name: master
       port: {{ .Values.service.master.port }}
-      targetPort: {{ .Values.service.master.targetPort } }}
+      targetPort: {{ .Values.service.master.targetPort }}
     - name: slave
       port: {{ .Values.service.slave.port}}
       targetPort: {{ .Values.service.slave.targetPort }}

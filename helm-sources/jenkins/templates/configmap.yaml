@@ -33,7 +33,7 @@ data:
         - kubernetes:
             containerCapStr: "10"
             maxRequestsPerHostStr: "32"
-            jenkinsUrl: "http://jenkins:{{ .Values.jenkins.master.port.http }}"
+            jenkinsUrl: "http://jenkins:{{ .Values.service.master.port }}"
             name: "kubernetes"
             namespace: "{{ .Values.namespace }}"
             skipTlsVerify: true
@@ -43,10 +43,10 @@ data:
           - credentials:
               - usernamePassword:
                   description: "Githubuser"
-                  id: "{{ .Values.credentials.github.id }}"
-                  password: "{{ .Values.credentials.github.password }}"
+                  id: "{{ .Values.github.credentials.id }}"
+                  password: "{{ .Values.github.credentials.password }}"
                   scope: GLOBAL
-                  username: "{{ .Values.credentials.github.username }}"
+                  username: "{{ .Values.github.credentials.username }}"
     unclassified:
       location:
         adminAddress: "{{ .Values.credentials.admin.email }}"

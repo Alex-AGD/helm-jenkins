@@ -1,34 +1,20 @@
-# Global settings
 namespace: ci-cd
 replicaCount: 1
+
+image:
+  repository: jfrog.it-academy.by/public/jenkins-ci
+  tag: aleksey_do
+  pullPolicy: IfNotPresent
 
 # Jenkins image settings
 jenkins:
   fullname: jenkins
-  image:
-    repository: jfrog.it-academy.by/public/jenkins-ci
-    tag: aleksey_do
-    pullPolicy: IfNotPresent
-
-  serviceAccount:
-    create: true
-    automount: true
-    annotations: { }
-    name: ""
-
-  # Service configuration
-  service:
-    master:
-      port: 8080
-      targetPort: 8080
-    slave:
-      port: 50000
-      targetPort: 50000
+  enabled: true
 
   # Jenkins configuration
   config:
     numExecutors: 2
-    enkinsUrl: "http://jenkins:8080"
+    jenkinsUrl: "http://jenkins:8080"
     installWizard: false
 
   # Kubernetes cloud configuration
@@ -42,8 +28,8 @@ jenkins:
 github:
   credentials:
     id: some_randome
-    username: git_hub_user
-    password: XXXXXXXXXXX
+    username: Alex-AGD
+    password: cGFzcw==
 
 # Ingress configuration
 ingress:
@@ -59,10 +45,6 @@ rbac:
   create: true
   clusterAdminRole: true
 
-# containerPort
-service:
-  type: ClusterIP
-  port: 80
 
 # Resources configuration
 resources:
@@ -98,10 +80,10 @@ volumes:
 
 credentials:
   admin:
+    username: YWRtaW4=
+    password: cGFzcw==
     email: monamax01@gmail.com
     url: "http://jenkins.k8s-5.sa/"
-    username: admin
-    passwordKey: pass
     existingSecret: jenkins-secret
 
 autoscaling:
@@ -110,3 +92,25 @@ autoscaling:
   maxReplicas: 3
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+# Service configuration
+service:
+  port: 8080
+  master:
+    port: 8080
+    targetPort: 8080
+  slave:
+    port: 50000
+    targetPort: 50000
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

@@ -3,9 +3,19 @@ entries:
   jenkins:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-02-01T11:52:04.869744165Z"
+    created: "2025-02-01T13:34:27.999464244Z"
     description: A Helm chart for Kubernetes
-    digest: 7696ad5f530bfbeac392ea667ea1c46671b57588b1476b1eae3f487de286b95b
+    digest: 8a234348707024b1f8c980abcb38ff9dd9c6a39df405b62010467298b5394f03
+    name: jenkins
+    type: application
+    urls:
+    - https://github.com/Alex-AGD/helm-jenkins/jenkins-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-02-01T13:34:28.012268169Z"
+    description: A Helm chart for Kubernetes
+    digest: e223fcc3a18322fd820a7fc692c8aa941613a3411565e9e473862a7110427ddb
     name: jenkins
     type: application
     urls:
@@ -13,7 +23,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-02-01T11:52:04.864572122Z"
+    created: "2025-02-01T13:34:28.006502145Z"
     description: A Helm chart for Kubernetes
     digest: 34c58043516baf9abc2fc721cf4f9d2e81a3d1f20fbb5c77aa57c156dfc204f0
     name: jenkins
@@ -23,7 +33,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-02-01T11:52:04.860732061Z"
+    created: "2025-02-01T13:34:28.003090752Z"
     description: A Helm chart for Kubernetes
     digest: 2f4cf07851e7e5c49f0ab10a2f04160d05904ff9cdb933e3b138c868fde9f8de
     name: jenkins
@@ -31,4 +41,4 @@ entries:
     urls:
     - https://github.com/Alex-AGD/helm-jenkins/helm-releases/jenkins-0.1.0.tgz
     version: 0.1.0
-generated: "2025-02-01T11:52:04.857597983Z"
+generated: "2025-02-01T13:34:27.995893352Z"
