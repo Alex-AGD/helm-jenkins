@@ -1,41 +1,51 @@
+# Global settings
+namespace: ci-cd
 replicaCount: 1
 
-namespace: ci-cd
-
-image:
-  repository: jfrog.it-academy.by/public/jenkins-ci
-  tag: aleksey_do
-  pullPolicy: IfNotPresent
-
+# Jenkins image settings
 jenkins:
-  numExecutors: 2
-  adminEmail: "pluhin@gmail.com"
-  url: "http://jenkins.k8s-XX.sa"
-  resources:
-    requests:
-      cpu: 2
-      memory: 2Gi
-    limits:
-      cpu: 3
-      memory: 3Gi
-  ports:
-    http: 8080
-    jnlp: 50000
+  fullname: jenkins
+  image:
+    repository: jfrog.it-academy.by/public/jenkins-ci
+    tag: aleksey_do
+    pullPolicy: IfNotPresent
 
-credentials:
-  admin:
-    username: admin
-    password: pass
-  github:
+  serviceAccount:
+    create: true
+    automount: true
+    annotations: { }
+    name: ""
+
+  # Service configuration
+  service:
+    master:
+      port: 8080
+      targetPort: 8080
+    slave:
+      port: 50000
+      targetPort: 50000
+
+  # Jenkins configuration
+  config:
+    numExecutors: 2
+    enkinsUrl: "http://jenkins:8080"
+    installWizard: false
+
+  # Kubernetes cloud configuration
+  kubernetesCloud:
+    containerCapStr: "10"
+    maxRequestsPerHostStr: "32"
+    namespace: ci-cd
+    skipTlsVerify: true
+
+# Github credentials
+github:
+  credentials:
+    id: some_randome
     username: git_hub_user
     password: XXXXXXXXXXX
-    id: some_randome
 
-persistence:
-  nfs:
-    server: 192.168.37.105
-    path: /mnt/IT-Academy/nfs-data/sa2-30-24/alex_agd/jenkins
-
+# Ingress configuration
 ingress:
   enabled: true
   className: nginx
@@ -44,37 +54,59 @@ ingress:
   path: /
   pathType: Prefix
 
-serviceAccount:
+# RBAC configuration
+rbac:
   create: true
-  automount: true
-  annotations: {}
-  name: ""
+  clusterAdminRole: true
 
-podAnnotations: {}
-podLabels: {}
-
-podSecurityContext: {}
-
-securityContext: {}
-
+# containerPort
 service:
   type: ClusterIP
   port: 80
 
+# Resources configuration
+resources:
+ requests:
+  cpu: 2
+  memory: 2Gi
+ limits:
+  cpu: 3
+  memory: 3Gi
 
+# Storage configuration
+volumeMounts:
+  - name: jenkins-auth-config
+    mountPath: /var/jenkins_home/init.groovy.d/basic-security.groovy
+    subPath: basic-security.groovy
+  - name: jenkins-config-yaml
+    mountPath: /var/jenkins_home/casc_configs/jenkins.yaml
+    subPath: jenkins.yaml
+  - name: jenkins-config
+    mountPath: /var/jenkins_home
 
+volumes:
+  - name: jenkins-auth-config
+    configMap:
+      name: basic-security
+  - name: jenkins-config-yaml
+    configMap:
+      name: jenkins-config
+  - name: jenkins-config
+    nfs:
+      server: 192.168.37.105
+      path: /mnt/IT-Academy/nfs-data/sa2-30-24/alex_agd/jenkins
 
+credentials:
+  admin:
+    email: monamax01@gmail.com
+    url: "http://jenkins.k8s-5.sa/"
+    username: admin
+    passwordKey: pass
+    existingSecret: jenkins-secret
 
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 10
+  maxReplicas: 3
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
-
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}

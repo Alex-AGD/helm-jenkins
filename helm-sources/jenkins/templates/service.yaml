@@ -4,12 +4,12 @@ metadata:
   name: jenkins
   namespace: {{ .Values.namespace }}
 spec:
-  ports:
-    - name: master
-      port: {{ .Values.jenkins.ports.http }}
-      targetPort: {{ .Values.jenkins.ports.http }}
-    - name: slave
-      port: {{ .Values.jenkins.ports.jnlp }}
-      targetPort: {{ .Values.jenkins.ports.jnlp }}
   selector:
     app: jenkins
+  ports:
+    - name: master
+      port: {{ .Values.service.master.port }}
+      targetPort: {{ .Values.service.master.targetPort } }}
+    - name: slave
+      port: {{ .Values.service.slave.port}}
+      targetPort: {{ .Values.service.slave.targetPort }}
