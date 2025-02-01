@@ -6,32 +6,27 @@ image:
   tag: aleksey_do
   pullPolicy: IfNotPresent
 
-# Jenkins image settings
 jenkins:
   fullname: jenkins
   enabled: true
 
-  # Jenkins configuration
   config:
     numExecutors: 2
     jenkinsUrl: "http://jenkins:8080"
     installWizard: false
 
-  # Kubernetes cloud configuration
   kubernetesCloud:
     containerCapStr: "10"
     maxRequestsPerHostStr: "32"
     namespace: ci-cd
     skipTlsVerify: true
 
-# Github credentials
 github:
   credentials:
     id: some_randome
     username: Alex-AGD
     password: cGFzcw==
 
-# Ingress configuration
 ingress:
   enabled: true
   className: nginx
@@ -40,13 +35,10 @@ ingress:
   path: /
   pathType: Prefix
 
-# RBAC configuration
 rbac:
   create: true
   clusterAdminRole: true
 
-
-# Resources configuration
 resources:
  requests:
   cpu: 2
@@ -55,7 +47,6 @@ resources:
   cpu: 3
   memory: 3Gi
 
-# Storage configuration
 volumeMounts:
   - name: jenkins-auth-config
     mountPath: /var/jenkins_home/init.groovy.d/basic-security.groovy
@@ -81,13 +72,15 @@ volumes:
 credentials:
   admin:
     username: YWRtaW4=
+    user: admin
+    pass: pass
     password: cGFzcw==
     email: monamax01@gmail.com
     url: "http://jenkins.k8s-5.sa/"
     existingSecret: jenkins-secret
 
 autoscaling:
-  enabled: false
+  enabled: true
   minReplicas: 1
   maxReplicas: 3
   targetCPUUtilizationPercentage: 80
@@ -99,7 +92,17 @@ serviceAccount:
   annotations: {}
   name: ""
 
-# Service configuration
+env:
+  - name: PASS
+    valueFrom:
+      secretKeyRef:
+        name: jenkins-secret
+        key: password
+  - name: JAVA_OPTS
+    value: "-Djenkins.install.runSetupWizard=false"
+  - name: CASC_JENKINS_CONFIG
+    value: /var/jenkins_home/casc_configs/jenkins.yaml
+
 service:
   port: 8080
   master:

@@ -9,10 +9,10 @@ data:
     import jenkins.model.*
     import hudson.security.*
     def instance = Jenkins.getInstance()
-    println "--> creating local user '{{ .Values.credentials.admin.username }}'"
+    println "--> creating local user '{{ .Values.credentials.admin.user }}'"
     def password = System.getenv("PASS")
     def hudsonRealm = new HudsonPrivateSecurityRealm(false)
-    hudsonRealm.createAccount('{{ .Values.credentials.admin.username }}', password)
+    hudsonRealm.createAccount('{{ .Values.credentials.admin.user }}', password)
     instance.setSecurityRealm(hudsonRealm)
     def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
     strategy.setAllowAnonymousRead(true)

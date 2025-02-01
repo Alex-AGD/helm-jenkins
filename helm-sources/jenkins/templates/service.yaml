@@ -5,7 +5,8 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   selector:
-    app: jenkins
+    app.kubernetes.io/name: jenkins
+    app.kubernetes.io/instance: jenkins
   ports:
     - name: master
       port: {{ .Values.service.master.port }}
