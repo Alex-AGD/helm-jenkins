@@ -3,52 +3,52 @@ entries:
   jenkins:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-02-02T12:08:49.647224732Z"
+    created: "2025-02-02T12:39:57.93063851Z"
     description: A Helm chart for Kubernetes
     digest: e736242a55e76c915d4f363a25ff5e04d78531496f3949bf42ea5ab0587d0d82
     name: jenkins
     type: application
     urls:
-    - https://github.com/Alex-AGD/helm-jenkins/helm-releases/jenkins-0.4.0.tgz
+    - https://alex-agd.github.io/helm-jenkins/helm-releases/jenkins-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-02-02T12:08:49.630137778Z"
+    created: "2025-02-02T12:39:57.910860579Z"
     description: A Helm chart for Kubernetes
     digest: ce91c063ba45eafea6327b92f2a63d2049db266a0fab5ddb221681bb205f6c74
     name: jenkins
     type: application
     urls:
-    - https://github.com/Alex-AGD/helm-jenkins/helm-releases/jenkins-0.3.1.tgz
+    - https://alex-agd.github.io/helm-jenkins/helm-releases/jenkins-0.3.1.tgz
     version: 0.3.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-02-02T12:08:49.621756277Z"
+    created: "2025-02-02T12:39:57.902932463Z"
     description: A Helm chart for Kubernetes
     digest: e223fcc3a18322fd820a7fc692c8aa941613a3411565e9e473862a7110427ddb
     name: jenkins
     type: application
     urls:
-    - https://github.com/Alex-AGD/helm-jenkins/helm-releases/jenkins-0.3.0.tgz
+    - https://alex-agd.github.io/helm-jenkins/helm-releases/jenkins-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-02-02T12:08:49.611527779Z"
+    created: "2025-02-02T12:39:57.882100939Z"
     description: A Helm chart for Kubernetes
     digest: 34c58043516baf9abc2fc721cf4f9d2e81a3d1f20fbb5c77aa57c156dfc204f0
     name: jenkins
     type: application
     urls:
-    - https://github.com/Alex-AGD/helm-jenkins/helm-releases/jenkins-0.2.0.tgz
+    - https://alex-agd.github.io/helm-jenkins/helm-releases/jenkins-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-02-02T12:08:49.603190632Z"
+    created: "2025-02-02T12:39:57.858747332Z"
     description: A Helm chart for Kubernetes
     digest: 2f4cf07851e7e5c49f0ab10a2f04160d05904ff9cdb933e3b138c868fde9f8de
     name: jenkins
     type: application
     urls:
-    - https://github.com/Alex-AGD/helm-jenkins/helm-releases/jenkins-0.1.0.tgz
+    - https://alex-agd.github.io/helm-jenkins/helm-releases/jenkins-0.1.0.tgz
     version: 0.1.0
-generated: "2025-02-02T12:08:49.58910412Z"
+generated: "2025-02-02T12:39:57.842034186Z"
